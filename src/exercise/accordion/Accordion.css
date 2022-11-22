@@ -1,0 +1,28 @@
+.accordionContainer {
+    width: 400px;
+    margin: 2rem;
+}
+
+.accordion {
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: grey;
+    font-size: 14px;
+    border: 0;
+}
+
+.accordionContent {
+    background-color: white;
+    border: 1px solid black;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+}
+
+.accordionText {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 18px;
+}
