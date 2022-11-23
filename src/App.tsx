@@ -1,4 +1,3 @@
-import './App.css';
 import ImageSlider from './exercise/imageSlider/imageSlider';
 
 const data = [
@@ -10,7 +9,7 @@ const data = [
 function App() {
   return (
     <div className="container">
-      <ImageSlider data={data} />
+      <ImageSlider dataSlider={data} />
     </div>
   )
 }

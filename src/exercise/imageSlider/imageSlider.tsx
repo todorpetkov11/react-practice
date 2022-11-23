@@ -1,53 +1,63 @@
-import { useState, MouseEvent } from "react"
-import { faArrowAltCircleRight, faArrowAltCircleLeft, faCircle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react"
+import "../imageSlider/imageSlider.css";
+import BtnSlider from "./BtnSlider";
 
 function ImageSlider(props: {
-    data: string[];
+    dataSlider: string[];
 }) {
 
-    const [activeImage, setActiveImage] = useState(0);
+    const [slideIndex, setSlideIndex] = useState(1)
 
-
-    function handlePreviousImageClick() {
-        if (activeImage === 0) {
-            setActiveImage(props.data.length - 1);
-            return;
-        };
-        setActiveImage(activeImage - 1)
+    const nextSlide = () => {
+        if (slideIndex !== props.dataSlider.length) {
+            setSlideIndex(slideIndex + 1)
+        }
+        else if (slideIndex === props.dataSlider.length) {
+            setSlideIndex(1)
+        }
     }
 
-    function handleNextImageClick() {
-        if (activeImage < props.data.length - 1) {
-            setActiveImage(activeImage + 1);
-            return;
-        };
-        setActiveImage(0);
-    };
+    const prevSlide = () => {
+        if (slideIndex !== 1) {
+            setSlideIndex(slideIndex - 1)
+        }
+        else if (slideIndex === 1) {
+            setSlideIndex(props.dataSlider.length)
+        }
+    }
 
-    function handleSpecificImageClick(event: any) {
-        setActiveImage(event.target.value)
-        console.log(activeImage)
-    };
+    const moveDot = (index: number) => {
+        setSlideIndex(index)
+    }
 
     return (
-        <div className="sliderContainer">
-            <button type="button" className="nextImageBtn" onClick={handlePreviousImageClick}>
-                <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-            </button>
-            <button type="button" className="nextImageBtn" onClick={handleNextImageClick}>
-                <FontAwesomeIcon icon={faArrowAltCircleRight} />
-            </button>
-            <img src={props.data[activeImage]} style={{ height: '200px', width: '300px' }}></img>
-            {props.data.map((image, index) => {
+        <div className="container-slider">
+            {props.dataSlider.map((obj, index) => {
                 return (
-                    <button value={index} type="button" key={index} className="specificBtn" onClick={handleSpecificImageClick}>
-                        <FontAwesomeIcon icon={faCircle} />
-                    </button>
+                    <div
+                        key={index}
+                        className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
+                    >
+                        <img
+                            src={obj}
+                        />
+                    </div>
                 )
             })}
+            <BtnSlider moveSlide={nextSlide} direction={"next"} />
+            <BtnSlider moveSlide={prevSlide} direction={"prev"} />
+
+            <div className="container-dots">
+                {Array.from({ length: props.dataSlider.length }).map((item, index) => (
+                    <button
+                        type="button"
+                        onClick={() => moveDot(index + 1)}
+                        className={slideIndex === index + 1 ? "dot active" : "dot"}
+                    ></button>
+                ))}
+            </div>
         </div>
-    );
+    )
 };
 
 export default ImageSlider;
