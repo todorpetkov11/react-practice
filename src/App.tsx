@@ -1,4 +1,5 @@
 import ImageSlider from './exercise/imageSlider/imageSlider';
+import LoginForm from './exercise/loginForm/LoginForm';
 
 const data = [
   'https://static5.depositphotos.com/1006844/519/i/450/depositphotos_5196564-stock-photo-beautiful-young-woman-kissing-a.jpg',
@@ -9,7 +10,7 @@ const data = [
 function App() {
   return (
     <div className="container">
-      <ImageSlider dataSlider={data} />
+      <LoginForm />
     </div>
   )
 }

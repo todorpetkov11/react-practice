@@ -15,6 +15,12 @@ function ImageSlider(props: {
         else if (slideIndex === props.dataSlider.length) {
             setSlideIndex(1)
         }
+        else if (slideIndex !== 1) {
+            setSlideIndex(slideIndex - 1)
+        }
+        else if (slideIndex === 1) {
+            setSlideIndex(props.dataSlider.length)
+        }
     }
 
     const prevSlide = () => {
